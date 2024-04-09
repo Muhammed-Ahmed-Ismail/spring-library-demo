@@ -2,32 +2,38 @@ package com.library.demo.service.imp;
 
 import com.library.demo.entity.Book;
 import com.library.demo.exception.BookNotFound;
-import com.library.demo.model.requests.CreateBookRequest;
+import com.library.demo.exception.CustomException;
+import com.library.demo.model.requests.book.CreateBookRequest;
+import com.library.demo.model.requests.book.UpdateBookRequest;
 import com.library.demo.repository.BookRepository;
 import com.library.demo.service.BookService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
 public class BookServiceImp implements BookService {
 
+    final String BOOK_IS_NOT_FOUND = "Book is not found";
     BookRepository bookRepository;
     ModelMapper modelMapper;
 
     @Autowired
-    public BookServiceImp(BookRepository bookRepository , ModelMapper modelMapper) {
+    public BookServiceImp(BookRepository bookRepository, ModelMapper modelMapper) {
         this.bookRepository = bookRepository;
         this.modelMapper = modelMapper;
     }
 
     @Override
     public Book getBook(Long id) {
-        Optional<Book> optionalBook =  this.bookRepository.findById(id);
-        Book book = optionalBook.orElseThrow(() -> new BookNotFound("Book is not found"));
+        Optional<Book> optionalBook = this.bookRepository.findById(id);
+        Book book = optionalBook.orElseThrow(() -> new BookNotFound(BOOK_IS_NOT_FOUND));
+
         return book;
     }
 
@@ -39,10 +45,25 @@ public class BookServiceImp implements BookService {
     @Override
     public Book createBook(CreateBookRequest request) {
 
-        Book book = modelMapper.map(request,Book.class);
+        Book book = modelMapper.map(request, Book.class);
+
 
         this.bookRepository.save(book);
 
+
+        return book;
+    }
+
+    @Override
+    public Book updateBook(UpdateBookRequest request, long pk) throws CustomException {
+        Optional<Book> optionalBook = this.bookRepository.findById(pk);
+        Book book = optionalBook.orElseThrow(() -> new BookNotFound(BOOK_IS_NOT_FOUND));
+        if (!Objects.equals(book.getIsbn(), request.getIsbn())) {
+            if (this.bookRepository.existsByIsbn(request.getIsbn()))
+                throw new CustomException("there is already another book with this isbn", "isbn");
+        }
+        this.modelMapper.map(request, book);
+        this.bookRepository.save(book);
         return book;
     }
 }

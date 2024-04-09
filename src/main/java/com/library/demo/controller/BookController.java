@@ -1,13 +1,14 @@
 package com.library.demo.controller;
 
 import com.library.demo.entity.Book;
-import com.library.demo.model.requests.CreateBookRequest;
+import com.library.demo.exception.CustomException;
+import com.library.demo.model.requests.book.CreateBookRequest;
+import com.library.demo.model.requests.book.UpdateBookRequest;
 import com.library.demo.service.BookService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,5 +28,15 @@ public class BookController {
     @GetMapping
     public ResponseEntity<List<Book>> getAllBooks() {
         return new ResponseEntity<>(this.bookService.listBooks(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Book> getById(@PathVariable long id){
+        return new ResponseEntity<>(this.bookService.getBook(id),HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Book> updateBook(@PathVariable long id , @RequestBody UpdateBookRequest request) throws CustomException {
+        return new ResponseEntity<Book>(this.bookService.updateBook(request,id),HttpStatus.OK);
     }
 }

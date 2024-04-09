@@ -1,18 +1,17 @@
-package com.library.demo.model.requests;
+package com.library.demo.model.requests.book;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-public class CreateBookRequest {
+public class UpdateBookRequest {
     @NotNull(message = "Field title cannot be null")
     @Getter
     @Setter
     private String title;
 
-
+    //    @UniqueIsbn(message = "Field isbn must be unique")
     @NotNull(message = "Field isbn cannot be null")
     @JsonProperty
     @Getter @Setter

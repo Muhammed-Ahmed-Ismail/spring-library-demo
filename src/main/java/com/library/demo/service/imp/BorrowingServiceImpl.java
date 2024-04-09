@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.Optional;
 
 @Service
-public class BorrowingService implements com.library.demo.service.BorrowingService {
+public class BorrowingServiceImpl implements com.library.demo.service.BorrowingService {
     private final String BOOK_NOT_FOUND = "Book not found";
     private final String PATRON_NOT_FOUND = "Patron not found";
 

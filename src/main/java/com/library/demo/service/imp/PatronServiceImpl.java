@@ -16,7 +16,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class PatronService implements com.library.demo.service.PatronService {
+public class PatronServiceImpl implements com.library.demo.service.PatronService {
     private final String PATRON_NOT_FOUND = "Patron not found";
 
     PatronRepository patronRepository;
@@ -24,7 +24,7 @@ public class PatronService implements com.library.demo.service.PatronService {
     ModelMapper modelMapper;
 
     @Autowired
-    public PatronService(PatronRepository patronRepository, ModelMapper modelMapper , BorrowingRecordRepository borrowingRecordRepository) {
+    public PatronServiceImpl(PatronRepository patronRepository, ModelMapper modelMapper , BorrowingRecordRepository borrowingRecordRepository) {
         this.patronRepository = patronRepository;
         this.modelMapper = modelMapper;
         this.borrowingRecordRepository = borrowingRecordRepository;

@@ -16,7 +16,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class BookService implements com.library.demo.service.BookService {
+public class BookServiceImpl implements com.library.demo.service.BookService {
 
     final String BOOK_IS_NOT_FOUND = "Book is not found";
 
@@ -25,7 +25,7 @@ public class BookService implements com.library.demo.service.BookService {
     BorrowingRecordRepository borrowingRecordRepository;
 
     @Autowired
-    public BookService(BookRepository bookRepository, ModelMapper modelMapper,BorrowingRecordRepository borrowingRecordRepository) {
+    public BookServiceImpl(BookRepository bookRepository, ModelMapper modelMapper, BorrowingRecordRepository borrowingRecordRepository) {
         this.bookRepository = bookRepository;
         this.modelMapper = modelMapper;
         this.borrowingRecordRepository = borrowingRecordRepository;

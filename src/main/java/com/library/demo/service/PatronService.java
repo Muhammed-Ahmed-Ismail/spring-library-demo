@@ -1,7 +1,7 @@
 package com.library.demo.service;
 
 import com.library.demo.entity.Patron;
-import com.library.demo.exception.PatronNotFound;
+import com.library.demo.exception.notfound.PatronNotFound;
 import com.library.demo.model.requests.patron.CreatePatronRequest;
 import com.library.demo.model.requests.patron.UpdatePatronRequest;
 

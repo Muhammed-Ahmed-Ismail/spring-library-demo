@@ -1,4 +1,4 @@
-package validator.patron.phone.unique;
+package com.library.demo.validator.patron.phone.unique;
 
 import com.library.demo.repository.PatronRepository;
 import jakarta.validation.ConstraintValidator;

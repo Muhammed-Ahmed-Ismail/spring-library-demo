@@ -1,7 +1,6 @@
 package com.library.demo.controller;
 
 import com.library.demo.entity.Patron;
-import com.library.demo.exception.PatronNotFound;
 import com.library.demo.model.requests.patron.CreatePatronRequest;
 import com.library.demo.model.requests.patron.UpdatePatronRequest;
 import com.library.demo.service.PatronService;

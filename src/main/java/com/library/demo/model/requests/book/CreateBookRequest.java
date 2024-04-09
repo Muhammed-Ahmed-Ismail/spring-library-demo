@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import validator.book.isnb.unique.UniqueIsbn;
+import com.library.demo.validator.book.isnb.unique.UniqueIsbn;
 
 @Setter
 @Getter

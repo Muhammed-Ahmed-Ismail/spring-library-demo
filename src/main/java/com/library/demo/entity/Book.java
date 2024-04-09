@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter
 @Entity
 public class Book {
     @Id
@@ -16,24 +17,20 @@ public class Book {
 
     @Column(nullable = false)
     @JsonProperty
-    @Getter
     @Setter
     private String title;
 
     @Column(unique = true, nullable = false)
     @JsonProperty
-    @Getter
     @Setter
     private String isbn;
 
     @Column(nullable = false)
     @JsonProperty
-    @Getter
     @Setter
     private String author;
 
     @JsonProperty
-    @Getter
     @Setter
     private String publicationYear;
 }

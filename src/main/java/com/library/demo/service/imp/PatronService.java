@@ -2,11 +2,10 @@ package com.library.demo.service.imp;
 
 import com.library.demo.entity.Patron;
 import com.library.demo.exception.CustomException;
-import com.library.demo.exception.PatronNotFound;
+import com.library.demo.exception.notfound.PatronNotFound;
 import com.library.demo.model.requests.patron.CreatePatronRequest;
 import com.library.demo.model.requests.patron.UpdatePatronRequest;
 import com.library.demo.repository.PatronRepository;
-import com.library.demo.service.PatronService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,13 +15,13 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class PatronServiceImp implements PatronService {
+public class PatronService implements com.library.demo.service.PatronService {
     private final String PATRON_NOT_FOUND = "Patron not found";
     PatronRepository patronRepository;
     ModelMapper modelMapper;
 
     @Autowired
-    public PatronServiceImp(PatronRepository patronRepository, ModelMapper modelMapper) {
+    public PatronService(PatronRepository patronRepository, ModelMapper modelMapper) {
         this.patronRepository = patronRepository;
         this.modelMapper = modelMapper;
     }

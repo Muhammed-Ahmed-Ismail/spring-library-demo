@@ -1,4 +1,4 @@
-package validator.book.isnb.unique;
+package com.library.demo.validator.book.isnb.unique;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

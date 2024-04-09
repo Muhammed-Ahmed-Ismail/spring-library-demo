@@ -1,4 +1,4 @@
-package validator.patron.email.unique;
+package com.library.demo.validator.patron.phone.unique;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -10,9 +10,9 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = UniqueEmailValidator.class)
-public @interface UniqueEmail {
-    String message() default "Email is already used";
+@Constraint(validatedBy = UniquePhoneValidator.class)
+public @interface UniquePhone {
+    String message() default "Phone is already registered";
     Class<?>[] groups() default { };
     Class<? extends Payload>[] payload() default { };
 }

@@ -1,30 +1,28 @@
 package com.library.demo.service.imp;
 
 import com.library.demo.entity.Book;
-import com.library.demo.exception.BookNotFound;
+import com.library.demo.exception.notfound.BookNotFound;
 import com.library.demo.exception.CustomException;
 import com.library.demo.model.requests.book.CreateBookRequest;
 import com.library.demo.model.requests.book.UpdateBookRequest;
 import com.library.demo.repository.BookRepository;
-import com.library.demo.service.BookService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class BookServiceImp implements BookService {
+public class BookService implements com.library.demo.service.BookService {
 
     final String BOOK_IS_NOT_FOUND = "Book is not found";
     BookRepository bookRepository;
     ModelMapper modelMapper;
 
     @Autowired
-    public BookServiceImp(BookRepository bookRepository, ModelMapper modelMapper) {
+    public BookService(BookRepository bookRepository, ModelMapper modelMapper) {
         this.bookRepository = bookRepository;
         this.modelMapper = modelMapper;
     }

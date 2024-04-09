@@ -1,4 +1,4 @@
-package com.library.demo.exception;
+package com.library.demo.exception.notfound;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

@@ -1,4 +1,4 @@
-package validator.patron.email.unique;
+package com.library.demo.validator.patron.email.unique;
 
 import com.library.demo.repository.PatronRepository;
 import jakarta.validation.ConstraintValidator;

@@ -1,4 +1,4 @@
-package validator.isnb.unique;
+package validator.book.isnb.unique;
 
 import com.library.demo.repository.BookRepository;
 import jakarta.validation.ConstraintValidator;

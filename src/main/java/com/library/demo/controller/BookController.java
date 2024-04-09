@@ -36,7 +36,13 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Book> updateBook(@PathVariable long id , @RequestBody UpdateBookRequest request) throws CustomException {
+    public ResponseEntity<Book> updateBook(@PathVariable long id , @RequestBody UpdateBookRequest request){
         return new ResponseEntity<Book>(this.bookService.updateBook(request,id),HttpStatus.OK);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteBook(@PathVariable long id){
+        this.bookService.deleteBook(id);
+        return new ResponseEntity<>("book deleted successfully",HttpStatus.OK);
     }
 }

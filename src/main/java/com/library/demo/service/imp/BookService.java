@@ -6,6 +6,7 @@ import com.library.demo.exception.CustomException;
 import com.library.demo.model.requests.book.CreateBookRequest;
 import com.library.demo.model.requests.book.UpdateBookRequest;
 import com.library.demo.repository.BookRepository;
+import com.library.demo.repository.BorrowingRecordRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,13 +19,16 @@ import java.util.Optional;
 public class BookService implements com.library.demo.service.BookService {
 
     final String BOOK_IS_NOT_FOUND = "Book is not found";
+
     BookRepository bookRepository;
     ModelMapper modelMapper;
+    BorrowingRecordRepository borrowingRecordRepository;
 
     @Autowired
-    public BookService(BookRepository bookRepository, ModelMapper modelMapper) {
+    public BookService(BookRepository bookRepository, ModelMapper modelMapper,BorrowingRecordRepository borrowingRecordRepository) {
         this.bookRepository = bookRepository;
         this.modelMapper = modelMapper;
+        this.borrowingRecordRepository = borrowingRecordRepository;
     }
 
     @Override
@@ -63,5 +67,13 @@ public class BookService implements com.library.demo.service.BookService {
         this.modelMapper.map(request, book);
         this.bookRepository.save(book);
         return book;
+    }
+
+    @Override
+    public void deleteBook(long id) {
+        if(this.borrowingRecordRepository.existsByBookIdAndBorrowToIsNull(id)){
+            throw new CustomException("Can not delete book as it is borrowed","book");
+        }
+        this.bookRepository.deleteById(id);
     }
 }

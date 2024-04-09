@@ -29,13 +29,18 @@ public class PatronController {
     }
 
     @GetMapping("{id}")
-    ResponseEntity<Patron> getPatronById(@PathVariable int id) {
+    ResponseEntity<Patron> getPatronById(@PathVariable long id) {
         return new ResponseEntity<>(this.patronService.getPatron(id), HttpStatus.OK);
     }
 
     @PutMapping("{id}")
-    ResponseEntity<Patron> updatePatron(@PathVariable int id, @Valid @RequestBody UpdatePatronRequest request){
+    ResponseEntity<Patron> updatePatron(@PathVariable long id, @Valid @RequestBody UpdatePatronRequest request){
         return new ResponseEntity<>(this.patronService.updatePatron(request,id),HttpStatus.OK);
+    }
+    @DeleteMapping("{id}")
+    ResponseEntity<String> deletePatron(@PathVariable long id ){
+        this.patronService.deletePatron(id);
+        return new ResponseEntity<>("patron deleted successfully",HttpStatus.OK);
     }
 }
 

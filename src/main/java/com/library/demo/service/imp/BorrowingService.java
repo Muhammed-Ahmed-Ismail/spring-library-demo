@@ -40,8 +40,8 @@ public class BorrowingService implements com.library.demo.service.BorrowingServi
         Optional<Patron> optionalPatron = this.patronRepository.findById(patronId);
         Patron patron = optionalPatron.orElseThrow(() -> new PatronNotFound(PATRON_NOT_FOUND));
 
-        var runningBorrowingRecordForBook = this.borrowingRecordRepository.findByBookIdAndBorrowToIsNull(bookId);
-        if (runningBorrowingRecordForBook != null)
+        var IsThereRunningBorrowingRecordForBook = this.borrowingRecordRepository.existsByBookIdAndBorrowToIsNull(bookId);
+        if (IsThereRunningBorrowingRecordForBook)
             throw new CustomException("Book is already borrowed", "book");
 
         var borrowingRecord = new BorrowingRecord();

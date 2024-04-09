@@ -8,8 +8,10 @@ import com.library.demo.model.requests.patron.UpdatePatronRequest;
 import java.util.List;
 
 public interface PatronService {
-    public Patron getPatron(long id) throws PatronNotFound;
-    public Patron createPatron(CreatePatronRequest request);
-    public Patron updatePatron(UpdatePatronRequest request,long pk);
-    public List<Patron> getAllPatrons();
+     Patron getPatron(long id) throws PatronNotFound;
+     Patron createPatron(CreatePatronRequest request);
+     Patron updatePatron(UpdatePatronRequest request,long pk);
+     List<Patron> getAllPatrons();
+     void deletePatron(long id);
+
 }

@@ -14,11 +14,11 @@ public class BorrowingRecord {
     private long id;
 
     @Setter
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     Book book;
 
     @Setter
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     Patron patron;
 
     @Setter

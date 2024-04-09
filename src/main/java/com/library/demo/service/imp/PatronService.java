@@ -5,6 +5,7 @@ import com.library.demo.exception.CustomException;
 import com.library.demo.exception.notfound.PatronNotFound;
 import com.library.demo.model.requests.patron.CreatePatronRequest;
 import com.library.demo.model.requests.patron.UpdatePatronRequest;
+import com.library.demo.repository.BorrowingRecordRepository;
 import com.library.demo.repository.PatronRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,16 @@ import java.util.Optional;
 @Service
 public class PatronService implements com.library.demo.service.PatronService {
     private final String PATRON_NOT_FOUND = "Patron not found";
+
     PatronRepository patronRepository;
+    BorrowingRecordRepository borrowingRecordRepository;
     ModelMapper modelMapper;
 
     @Autowired
-    public PatronService(PatronRepository patronRepository, ModelMapper modelMapper) {
+    public PatronService(PatronRepository patronRepository, ModelMapper modelMapper , BorrowingRecordRepository borrowingRecordRepository) {
         this.patronRepository = patronRepository;
         this.modelMapper = modelMapper;
+        this.borrowingRecordRepository = borrowingRecordRepository;
     }
 
 
@@ -64,4 +68,14 @@ public class PatronService implements com.library.demo.service.PatronService {
     public List<Patron> getAllPatrons() {
         return this.patronRepository.findAll();
     }
+
+    @Override
+    public void deletePatron(long id) {
+        if(this.borrowingRecordRepository.existsByPatronIdAndBorrowToIsNull(id)){
+            throw new CustomException("Can not delete patron he/she still borrowing a book","patron");
+        }
+        this.patronRepository.deleteById(id);
+    }
+
+
 }

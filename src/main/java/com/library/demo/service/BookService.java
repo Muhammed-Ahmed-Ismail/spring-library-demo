@@ -11,5 +11,6 @@ public interface BookService {
     public Book getBook(Long id);
     public List<Book> listBooks();
     public Book createBook(CreateBookRequest request);
-    public Book updateBook(UpdateBookRequest request , long pk) throws CustomException;
+    public Book updateBook(UpdateBookRequest request , long pk);
+    public void deleteBook(long pk);
 }
